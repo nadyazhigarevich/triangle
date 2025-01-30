@@ -1,18 +1,22 @@
+import java.io.EOFException;
+
 public class TriangleService {
 
     private boolean exists(Triangle triangle) {
-        if (triangle.getA() + triangle.getB() > triangle.getC() && triangle.getA() + triangle.getC() > triangle.getB() && triangle.getB() + triangle.getC() > triangle.getA()) {
+        if (triangle.getA() + triangle.getB() > triangle.getC()
+                && triangle.getA() + triangle.getC() > triangle.getB()
+                && triangle.getB() + triangle.getC() > triangle.getA()) {
             return true;
         } else {
             System.out.println("Triangle is not exist");
-            return false;
+            throw new RuntimeException("Invalid arguments");
         }
     }
 
     public double calculateArea(Triangle triangle) {
         if (!exists(triangle)) return 0.0;
-        double s = calculatePerimeter(triangle) / 2;
-        return Math.sqrt(s * (s - triangle.getA()) * (s - triangle.getB()) * (s - triangle.getC()));
+        double semiPerimeter = calculatePerimeter(triangle) / 2;
+        return Math.sqrt(semiPerimeter * (semiPerimeter - triangle.getA()) * (semiPerimeter - triangle.getB()) * (semiPerimeter - triangle.getC()));
     }
 
     public double calculatePerimeter(Triangle triangle) {
@@ -23,18 +27,21 @@ public class TriangleService {
     public String getType(Triangle triangle) {
         if (!exists(triangle)) return " ";
 
-        if (triangle.getA() == triangle.getB() && triangle.getB() == triangle.getC()) {
-            return "Ravnostoroniy";
+        if (triangle.getA() == triangle.getB()
+                && triangle.getB() == triangle.getC()) {
+            return TriangleType.EQUILATERAL.name();
         }
-        if (triangle.getA() == triangle.getB() || triangle.getB() == triangle.getC() || triangle.getA() == triangle.getC()) {
-            return "Ravnobedreniy";
+        if (triangle.getA() == triangle.getB()
+                || triangle.getB() == triangle.getC()
+                || triangle.getA() == triangle.getC()) {
+            return TriangleType.ISOSCELES.name();
         }
-        if (Math.pow(triangle.getA(), 2) + Math.pow(triangle.getB(), 2) == Math.pow(triangle.getC(), 2) ||
-                Math.pow(triangle.getA(), 2) + Math.pow(triangle.getC(), 2) == Math.pow(triangle.getB(), 2) ||
-                Math.pow(triangle.getB(), 2) + Math.pow(triangle.getC(), 2) == Math.pow(triangle.getA(), 2)) {
-            return "Pramoygolniy";
+        if (Math.pow(triangle.getA(), 2) + Math.pow(triangle.getB(), 2) == Math.pow(triangle.getC(), 2)
+                || Math.pow(triangle.getA(), 2) + Math.pow(triangle.getC(), 2) == Math.pow(triangle.getB(), 2)
+                || Math.pow(triangle.getB(), 2) + Math.pow(triangle.getC(), 2) == Math.pow(triangle.getA(), 2)) {
+            return TriangleType.RECTANGULAR.name();
         } else {
-            return "Proizvolniy";
+            return TriangleType.ARBITRARY.name();
         }
     }
 }

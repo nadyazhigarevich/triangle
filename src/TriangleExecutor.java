@@ -1,14 +1,17 @@
 public class TriangleExecutor {
-    TriangleService triangleService;
+    private TriangleService triangleService;
 
     public TriangleExecutor(TriangleService triangleService) {
         this.triangleService = triangleService;
     }
 
     public void execute(Triangle triangle) {
-        this.executePerimetr(triangle);
-        this.executeArea(triangle);
-        this.executeType(triangle);
+        try {
+            this.executePerimetr(triangle);
+            this.executeArea(triangle);
+            this.executeType(triangle);
+        } catch (RuntimeException _) {
+        }
     }
 
     private void executePerimetr(Triangle triangle) {
