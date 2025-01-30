@@ -33,10 +33,9 @@ public class TriangleService {
     }
 
     private void checkIfExists(Triangle triangle) {
-        if (triangle.getA() + triangle.getB() > triangle.getC()
+        if (!(triangle.getA() + triangle.getB() > triangle.getC()
                 && triangle.getA() + triangle.getC() > triangle.getB()
-                && triangle.getB() + triangle.getC() > triangle.getA()) {
-        } else {
+                && triangle.getB() + triangle.getC() > triangle.getA())) {
             throw new RuntimeException("Invalid arguments");
         }
     }
