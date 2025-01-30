@@ -10,7 +10,8 @@ public class TriangleExecutor {
             this.executePerimetr(triangle);
             this.executeArea(triangle);
             this.executeType(triangle);
-        } catch (RuntimeException _) {
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
