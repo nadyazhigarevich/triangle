@@ -1,18 +1,8 @@
 public class TriangleService {
     Triangle triangle;
-    double a;
-    double b;
-    double c;
 
-    public TriangleService(Triangle triangle) {
-        this.triangle = triangle;
-        this.a = triangle.getA();
-        this.b = triangle.getA();
-        this.c = triangle.getA();
-    }
-
-    private boolean exists() {
-        if (a + b > c && a + c > b && b + c > a) {
+    private boolean exists(Triangle triangle) {
+        if (triangle.getA() + triangle.getB() > triangle.getC() && triangle.getA() + triangle.getC() > triangle.getB() && triangle.getB() + triangle.getC() > triangle.getA()) {
             return true;
         } else {
             System.out.println("Triangle is not exist");
@@ -20,29 +10,29 @@ public class TriangleService {
         }
     }
 
-    public double calculateArea() {
-        if (!exists()) return 0.0;
-        double s = calculatePerimeter() / 2;
-        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    public double calculateArea(Triangle triangle) {
+        if (!exists(triangle)) return 0.0;
+        double s = calculatePerimeter(triangle) / 2;
+        return Math.sqrt(s * (s - triangle.getA()) * (s - triangle.getB()) * (s - triangle.getC()));
     }
 
-    public double calculatePerimeter() {
-        if (!exists()) return 0.0;
-        return a + b + c;
+    public double calculatePerimeter(Triangle triangle) {
+        if (!exists(triangle)) return 0.0;
+        return triangle.getA() + triangle.getB() + triangle.getC();
     }
 
-    public String getType() {
-        if (!exists()) return " ";
+    public String getType(Triangle triangle) {
+        if (!exists(triangle)) return " ";
 
-        if (a == b && b == c) {
+        if (triangle.getA() == triangle.getB() && triangle.getB() == triangle.getC()) {
             return "Ravnostoroniy";
         }
-        if (a == b || b == c || a == c) {
+        if (triangle.getA() == triangle.getB() || triangle.getB() == triangle.getC() || triangle.getA() == triangle.getC()) {
             return "Ravnobedreniy";
         }
-        if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2) ||
-                Math.pow(a, 2) + Math.pow(c, 2) == Math.pow(b, 2) ||
-                Math.pow(b, 2) + Math.pow(c, 2) == Math.pow(a, 2)) {
+        if (Math.pow(triangle.getA(), 2) + Math.pow(triangle.getB(), 2) == Math.pow(triangle.getC(), 2) ||
+                Math.pow(triangle.getA(), 2) + Math.pow(triangle.getC(), 2) == Math.pow(triangle.getB(), 2) ||
+                Math.pow(triangle.getB(), 2) + Math.pow(triangle.getC(), 2) == Math.pow(triangle.getA(), 2)) {
             return "Pramoygolniy";
         } else {
             return "Proizvolniy";
