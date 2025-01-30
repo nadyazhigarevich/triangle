@@ -1,5 +1,4 @@
 public class TriangleService {
-    Triangle triangle;
 
     private boolean exists(Triangle triangle) {
         if (triangle.getA() + triangle.getB() > triangle.getC() && triangle.getA() + triangle.getC() > triangle.getB() && triangle.getB() + triangle.getC() > triangle.getA()) {
