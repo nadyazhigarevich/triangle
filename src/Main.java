@@ -6,7 +6,7 @@ public class Main {
             double a = scanner.nextDouble();
             double b = scanner.nextDouble();
             double c = scanner.nextDouble();
-            TriangleExecutor executor = new TriangleExecutor(new TriangleService());
+            TriangleExecutor executor = new TriangleExecutor(new TriangleServiceImpl());
             Triangle t1 = new Triangle(a, b, c);
             executor.execute(t1);
         }
